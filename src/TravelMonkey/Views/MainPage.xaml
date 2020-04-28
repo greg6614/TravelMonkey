@@ -86,13 +86,19 @@
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10,0">
+
                                 <yummy:PancakeView HeightRequest="120" WidthRequest="200" IsClippedToBounds="true" CornerRadius="12">
                                     <Grid>
-                                        <Image Aspect="AspectFill" Source="{Binding Image}" />
-                                        <yummy:PancakeView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundGradientStartColor="Transparent" BackgroundGradientEndColor="#222" />
-                                        <StackLayout Spacing="0" Margin="12" VerticalOptions="EndAndExpand">
-                                            <Label FontSize="16" FontFamily="LatoBold" TextColor="#fff" Text="{Binding Description}" />
-                                        </StackLayout>
+                                        <Image Aspect="AspectFill" Source="{Binding Image}"/>
+                                        <yummy:PancakeView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundGradientStartColor="Transparent" BackgroundGradientEndColor="#222">
+                                            <yummy:PancakeView.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.PictureCommand}" CommandParameter="{Binding Id}"/>
+                                            </yummy:PancakeView.GestureRecognizers>
+                                            <StackLayout Spacing="0" Margin="12" VerticalOptions="EndAndExpand">
+                                                <Label FontSize="16" FontFamily="LatoBold" TextColor="#fff" Text="{Binding Description}" />
+                                            </StackLayout>
+                                        </yummy:PancakeView>
+                                        
                                     </Grid>
                                 </yummy:PancakeView>
                             </Grid>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TravelMonkey.Views.PictureView" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:effect="clr-namespace:TravelMonkey.Effects" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" Title="Picture details">
+
+    <Grid>
+        <yummy:PancakeView BackgroundGradientStartColor="SteelBlue" BackgroundGradientEndColor="LightGray" BackgroundGradientAngle="40">
+            <yummy:PancakeView.Effects>
+                <effect:SafeAreaPaddingEffect />
+            </yummy:PancakeView.Effects>
+            <Grid Margin="7">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Text="Close" Clicked="Button_Clicked" HorizontalOptions="Center" FontFamily="LatoBold" TextColor="White" />
+
+                <yummy:PancakeView Grid.Row="1" Padding="0" BorderColor="#44FFFFFF" CornerRadius="10" BorderThickness="2">
+                    <Grid>
+                        <Image HorizontalOptions="Fill" VerticalOptions="Fill" Source="{Binding Picture.Image}" Aspect="AspectFill"/>
+
+                    </Grid>
+                </yummy:PancakeView>
+
+                <yummy:PancakeView Grid.Row="2" BackgroundColor="#44FFFFFF" CornerRadius="5" Padding="2">
+                    <Label Text="{Binding Picture.Description}" HorizontalTextAlignment="Center" />
+                </yummy:PancakeView>
+            </Grid>
+
+        </yummy:PancakeView>
+        <Grid IsVisible="False" BackgroundColor="#B0000000">
+            <forms:AnimationView x:Name="AnimationView"
+                         Animation="monkeyLoading.json"
+                         IsPlaying="{Binding IsAnalysing}"
+                         Loop="True"
+                         AutoPlay="True"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand" />
+        </Grid>
+    </Grid>
+    
+    
+</ContentPage>

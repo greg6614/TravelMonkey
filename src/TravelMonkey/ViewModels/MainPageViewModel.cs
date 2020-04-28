@@ -22,6 +22,8 @@ namespace TravelMonkey.ViewModels
             set => Set(ref _currentDestination, value);
         }
 
+        public Command<string> PictureCommand { get; }
+
         public Command<string> OpenUrlCommand { get; } = new Command<string>(async (url) =>
         {
             if (!string.IsNullOrWhiteSpace(url))
@@ -49,6 +51,11 @@ namespace TravelMonkey.ViewModels
                         CurrentDestination = Destinations[currentIdx + 1];
                 };
             }
+
+            PictureCommand = new Command<string>((desc) => 
+            { 
+                MessagingCenter.Send<MainPageViewModel, string>(this, Constants.PictureDetail, desc); 
+            });
         }
 
         public void StartSlideShow()
