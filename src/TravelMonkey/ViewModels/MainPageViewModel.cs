@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Timers;
 using TravelMonkey.Data;
 using TravelMonkey.Models;
+using TravelMonkey.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -11,6 +12,7 @@ namespace TravelMonkey.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         private readonly Timer _slideShowTimer = new Timer(5000);
+        private readonly AzureStorageService _storageService = new AzureStorageService();
 
         public List<Destination> Destinations => MockDataStore.Destinations;
         public ObservableCollection<PictureEntry> Pictures => MockDataStore.Pictures;
@@ -37,6 +39,7 @@ namespace TravelMonkey.ViewModels
 
         public MainPageViewModel()
         {
+            _storageService.GetAllBlobs();
             if (Destinations.Count > 0)
             {
                 CurrentDestination = Destinations[0];

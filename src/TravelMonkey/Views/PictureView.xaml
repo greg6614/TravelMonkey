@@ -13,6 +13,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+                
                 <Button Grid.Row="0" Text="Close" Clicked="Button_Clicked" HorizontalOptions="Center" FontFamily="LatoBold" TextColor="White" />
 
                 <yummy:PancakeView Grid.Row="1" Padding="0" BorderColor="#44FFFFFF" CornerRadius="10" BorderThickness="2">
@@ -25,6 +26,8 @@
                 <yummy:PancakeView Grid.Row="2" BackgroundColor="#44FFFFFF" CornerRadius="5" Padding="2">
                     <Label Text="{Binding Picture.Description}" HorizontalTextAlignment="Center" />
                 </yummy:PancakeView>
+                <Button Grid.Row="3" Text="Detect faces" FontAttributes="Bold" BackgroundColor="SteelBlue" TextColor="White" Command="{Binding DetectFacesCommand}" />
+
             </Grid>
 
         </yummy:PancakeView>

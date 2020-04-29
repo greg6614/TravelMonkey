@@ -13,6 +13,7 @@ namespace TravelMonkey.ViewModels
     public class AddPicturePageViewModel : BaseViewModel
     {
         private readonly ComputerVisionService _computerVisionService = new ComputerVisionService();
+        private readonly AzureStorageService _storageService = new AzureStorageService();
 
         public bool ShowImagePlaceholder => !ShowPhoto;
         public bool ShowPhoto => _photoSource != null;
@@ -59,11 +60,20 @@ namespace TravelMonkey.ViewModels
         public AddPicturePageViewModel()
         {
             TakePhotoCommand = new Command(async () => await TakePhoto());
-            AddPictureCommand = new Command(() =>
+            AddPictureCommand = new Command(async () =>
              {
                  if (ShowPhoto)
                  {
-                     MockDataStore.Pictures.Add(new PictureEntry {Id = Guid.NewGuid().ToString(), Description = _pictureDescription, Image = _photoSource });
+                     var res = await _storageService.PerformBlobOperation(_photo);
+                     if (!res.Success)
+                     {
+                         MessagingCenter.Send(this, Constants.AzureBlobFail);
+                         MockDataStore.Pictures.Add(new PictureEntry { Id = Guid.NewGuid().ToString(), Description = _pictureDescription, Image = PhotoSource });
+                     } else
+                     {
+                         MockDataStore.Pictures.Add(new PictureEntry { Id = Guid.NewGuid().ToString(), Description = _pictureDescription, Image = ImageSource.FromUri(res.Uri) });
+                     }
+
                      MessagingCenter.Send(this, Constants.PictureAddedMessage);
                  } else
                  {
@@ -113,6 +123,7 @@ namespace TravelMonkey.ViewModels
             try
             {
                 var pictureStream = _photo.GetStreamWithImageRotatedForExternalStorage();
+
                 var result = await _computerVisionService.AddPicture(pictureStream);
 
                 if (!result.Succeeded)

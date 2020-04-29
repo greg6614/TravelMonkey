@@ -7,5 +7,7 @@
         public const string PictureFailedMessage = nameof(PictureFailedMessage);
         public const string NoPictureSelected = nameof(NoPictureSelected);
         public const string PictureDetail = nameof(PictureDetail);
+        public const string AzureBlobFail = nameof(AzureBlobFail);
+        public const string CannotDetectFaces = nameof(CannotDetectFaces);
     }
 }
