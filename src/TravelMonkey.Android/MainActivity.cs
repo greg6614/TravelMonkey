@@ -18,7 +18,7 @@ namespace TravelMonkey.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Acr.UserDialogs.UserDialogs.Init(this);
-
+            Lottie.Forms.Droid.AnimationViewRenderer.Init();
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

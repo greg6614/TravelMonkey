@@ -12,4 +12,3 @@ namespace TravelMonkey.Models
         public int height { get; set; }
     }
 }
-}

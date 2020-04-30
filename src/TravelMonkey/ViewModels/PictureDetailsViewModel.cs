@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TravelMonkey.Data;
 using TravelMonkey.Models;
 using TravelMonkey.Services;
@@ -9,9 +7,16 @@ using Xamarin.Forms;
 
 namespace TravelMonkey.ViewModels
 {
-    public class PictureDetailsViewModel
+    public class PictureDetailsViewModel : BaseViewModel
     {
         private readonly FaceService _faceService = new FaceService();
+
+        private bool _isDetecting;
+        public bool IsDetecting
+        {
+            get => _isDetecting;
+            set => Set(ref _isDetecting, value);
+        }
 
         public PictureEntry Picture { get; set; }
 
@@ -28,7 +33,25 @@ namespace TravelMonkey.ViewModels
                 MessagingCenter.Send(this, Constants.CannotDetectFaces);
                 return;
             }
-            await _faceService.AnalyseFaces(((UriImageSource)Picture.Image).Uri);
+            IsDetecting = true;
+            try
+            {
+                var res = await _faceService.AnalyseFaces(((UriImageSource)Picture.Image).Uri);
+                if (res.ErrorMessage != null)
+                {
+                    MessagingCenter.Send(this, Constants.DetectFacesFailed);
+                } else
+                {
+                    res.FacesItems.ForEach((d) => d.Source = Picture.Image);
+                    MessagingCenter.Send<PictureDetailsViewModel,FacesResult>(this, Constants.DetectFacesSuccess,res);
+
+                }
+
+            }
+            finally
+            {
+                IsDetecting = false;
+            }
         }
 
         public Command DetectFacesCommand { get; }

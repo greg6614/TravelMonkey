@@ -31,14 +31,14 @@
             </Grid>
 
         </yummy:PancakeView>
-        <Grid IsVisible="False" BackgroundColor="#B0000000">
+        <Grid IsVisible="{Binding IsDetecting}" BackgroundColor="#B0000000">
             <forms:AnimationView x:Name="AnimationView"
                          Animation="monkeyLoading.json"
-                         IsPlaying="{Binding IsAnalysing}"
                          Loop="True"
-                         AutoPlay="True"
+                         IsPlaying="True"
                          VerticalOptions="FillAndExpand"
-                         HorizontalOptions="FillAndExpand" />
+                         HorizontalOptions="FillAndExpand"/>
+            <Label Text="Detecting faces ..." VerticalOptions="End" HorizontalTextAlignment="Center" Margin="0,0,0,200" TextColor="White" FontSize="Medium" FontFamily="LatoRegular"/>
         </Grid>
     </Grid>
     

@@ -75,7 +75,7 @@
             </StackLayout>
 
             <ScrollView Orientation="Horizontal">
-                <StackLayout Spacing="0" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Pictures}" HeightRequest="120">
+                <StackLayout Spacing="10" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Pictures}" HeightRequest="200">
                     <BindableLayout.EmptyViewTemplate>
                         <DataTemplate>
                             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
@@ -87,7 +87,7 @@
                         <DataTemplate>
                             <Grid Padding="10,0">
 
-                                <yummy:PancakeView HeightRequest="120" WidthRequest="200" IsClippedToBounds="true" CornerRadius="12">
+                                <yummy:PancakeView HeightRequest="200" WidthRequest="300" IsClippedToBounds="true" CornerRadius="12">
                                     <Grid>
                                         <Image Aspect="AspectFill" Source="{Binding Image}"/>
                                         <yummy:PancakeView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundGradientStartColor="Transparent" BackgroundGradientEndColor="#222">

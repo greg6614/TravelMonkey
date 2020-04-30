@@ -21,10 +21,10 @@ namespace TravelMonkey.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             AnimationViewRenderer.Init();
-
             UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
 
             LoadApplication(new App());
+
 
             return base.FinishedLaunching(app, options);
         }
